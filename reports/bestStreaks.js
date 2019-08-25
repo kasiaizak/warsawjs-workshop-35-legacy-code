@@ -1,21 +1,21 @@
-var fs = require('fs');
-var DayDate = require('../src/DayDate');
-var Streaks = require('../src/Streaks');
-var Streak = require('../src/Streak');
-var genSpaces = require('../src/genSpaces.js');
+const fs = require('fs');
+const DayDate = require('../src/DayDate');
+const Streaks = require('../src/Streaks');
+const Streak = require('../src/Streak');
+const genSpaces = require('../src/genSpaces.js');
 
 
-var habits = [];
-var max; // Length of the longest habit name
+let habits = [];
+let max; // Length of the longest habit name
 
 fs.readFile('./data.txt', 'utf-8', function(e, d) {
   habits = d.split(/\n/);
 
-  var done = [];
-  var dates = {};
-  var times = 1;
+  let done = [];
+  const dates = {};
+  let times = 1;
 
-  for (var i = 0; i < habits.length; i++) {
+  for (let i = 0; i < habits.length; i++) {
     if (!done.includes(habits[i].substring(0, habits[i].indexOf(',')))) {
       done = done.concat([habits[i].substring(0, habits[i].indexOf(','))])
       name = habits[i].substring(0, habits[i].indexOf(','));
@@ -31,7 +31,7 @@ fs.readFile('./data.txt', 'utf-8', function(e, d) {
         max = name.length;
       }
 
-      for (var j = 0; j < habits.length; j++) {
+      for (let j = 0; j < habits.length; j++) {
         if (habits[j].startsWith(name)) {
           if (times) {
             times++; // increment times
@@ -47,8 +47,8 @@ fs.readFile('./data.txt', 'utf-8', function(e, d) {
       }
 
       streaks = [];
-      var prev = null;
-      var currentStreak = null;
+      let prev = null;
+      let currentStreak = null;
 
       // create streaks
       dates[name].forEach(dayDate => {

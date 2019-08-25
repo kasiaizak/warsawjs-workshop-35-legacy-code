@@ -1,4 +1,4 @@
-module.exports = class Streak {
+module.exports = class Streak { // zmiana nazwy na te z nazwy pliku, składnia exportu w node
   constructor() {
     this.start = null;
     this.last = null;

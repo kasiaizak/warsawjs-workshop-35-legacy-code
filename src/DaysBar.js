@@ -1,6 +1,6 @@
 module.exports = class DaysBar {
   constructor(from, to) {
-    this.range = { from: from, to: to };
+    this.range = { from: from, to: to }; // do skrócenia {from, to}
     this.dayDates = [];
   }
 
@@ -10,16 +10,16 @@ module.exports = class DaysBar {
   }
 
   printBar() {
-    var currentDayDate = this.range.from;
-    var bar = '';
+    let currentDayDate = this.range.from;
+    let bar = '';
 
     while (currentDayDate.toString() <= this.range.to.toString()) {
-      var dayDate = this.dayDates.find(dayDate => dayDate[0].toString() == currentDayDate.toString());
+      const dayDate = this.dayDates.find(dayDate => dayDate[0].toString() == currentDayDate.toString());
 
       if (dayDate) {
         if (dayDate[1]) {
           // use green color
-          bar = bar + '\x1B[42m \x1B[0m';
+          bar = bar + '\x1B[42m \x1B[0m'; // do skrócenia +=
         } else {
           // use red color
           bar = bar + '\x1B[41m \x1B[0m';
