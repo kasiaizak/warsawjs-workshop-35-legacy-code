@@ -1,37 +1,39 @@
 module.exports = class DaysBar {
   constructor(from, to) {
-    this.range = { from: from, to: to }; // do skrócenia {from, to}
+    this.range = { from, to };
     this.dayDates = [];
   }
 
   addDayDate(dayDate, isChecked) {
     // TODO: investigate why replace(',', '') is needed
-    this.dayDates.push([dayDate.toString().replace(',', ''),isChecked]);
+    this.dayDates.push([dayDate.toString().replace(',', ''), isChecked]);
   }
 
-  printBar() {
+  generateBar() {
     let currentDayDate = this.range.from;
     let bar = '';
 
     while (currentDayDate.toString() <= this.range.to.toString()) {
-      const dayDate = this.dayDates.find(dayDate => dayDate[0].toString() == currentDayDate.toString());
+      const dayDate = this.dayDates.find((dayDate) => dayDate[0].toString() === currentDayDate.toString());
 
       if (dayDate) {
         if (dayDate[1]) {
           // use green color
-          bar = bar + '\x1B[42m \x1B[0m'; // do skrócenia +=
+          bar += '\x1B[42m \x1B[0m';
         } else {
           // use red color
-          bar = bar + '\x1B[41m \x1B[0m';
+          bar += '\x1B[41m \x1B[0m';
         }
       } else {
-          // use gray color
-          bar = bar + '\x1B[43m \x1B[0m';
-
+        // use yellow color
+        bar += '\x1B[43m \x1B[0m';
       }
       currentDayDate = currentDayDate.getNext();
     }
 
+    return bar;
+
+    // eslint-disable-next-line no-console
     console.log(bar);
   }
-}
+};

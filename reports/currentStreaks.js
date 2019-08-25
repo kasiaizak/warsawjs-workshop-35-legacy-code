@@ -1,14 +1,12 @@
 const fs = require('fs');
 const DayDate = require('../src/DayDate');
 const Streak = require('../src/Streak');
-const CounterBar = require('../src/CounterBar');
+// const CounterBar = require('../src/CounterBar');
 const Streaks = require('../src/Streaks.js');
-
 
 let habits = [];
 
-
-fs.readFile('./data.txt', 'utf-8', function(e, d) {
+fs.readFile('./data.txt', 'utf-8', (e, d) => {
   habits = d.split(/\n/);
 
   // console.log('habits', habits);
@@ -16,14 +14,15 @@ fs.readFile('./data.txt', 'utf-8', function(e, d) {
   let done = [];
   const dates = {};
 
+  // eslint-disable-next-line no-console
   console.log('\x1B[37;1;4mCurrent Streaks\x1B[0m');
 
-  for (let i = 0; i < habits.length; i++) {
+  for (let i = 0; i < habits.length; i += 1) {
     if (!done.includes(habits[i].substring(0, habits[i].indexOf(',')))) {
-      done = done.concat([habits[i].substring(0, habits[i].indexOf(','))])
-      name = habits[i].substring(0, habits[i].indexOf(','));
+      done = done.concat([habits[i].substring(0, habits[i].indexOf(','))]);
+      const name = habits[i].substring(0, habits[i].indexOf(','));
 
-      for (let j = 0; j < habits.length; j++) {
+      for (let j = 0; j < habits.length; j += 1) {
         // filter
         if (habits[j].startsWith(name)) {
           if (!dates[name]) {
@@ -33,12 +32,12 @@ fs.readFile('./data.txt', 'utf-8', function(e, d) {
         }
       }
 
-      streaks = [];
+      let streaks = [];
       let prev = null;
       let currentStreak = null;
 
-      dates[name].forEach(dayDate => {
-        if (prev && prev.getNext().toString() == dayDate.toString().replace(',', '')) {
+      dates[name].forEach((dayDate) => {
+        if (prev && prev.getNext().toString() === dayDate.toString().replace(',', '')) {
           if (currentStreak) {
             currentStreak.setEndDate(dayDate);
           } else {

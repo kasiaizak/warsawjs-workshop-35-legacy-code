@@ -11,4 +11,4 @@ module.exports = class Streak extends BaseStreak {
     // console.log('days', days);
     return days;
   }
-}
+};
